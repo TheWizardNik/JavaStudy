@@ -1,0 +1,79 @@
+import java.util.Arrays;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Student s1 = new Student("Вася",3,4,5);
+        Student s2 = new Student("Петя");
+        Student s3 = new Student("Андрей");
+
+        System.out.println(s1.getInfo());
+
+        s2.copyMarks(s1);
+
+        System.out.println(s1.getInfo());
+        System.out.println(s2.getInfo());
+
+        s2.setMark(5,0);
+
+        System.out.println(s1.getInfo());
+        System.out.println(s2.getInfo());
+
+        s3.trueCopyMarks(s1);
+
+        System.out.println(s1.getInfo());
+        System.out.println(s2.getInfo());
+        System.out.println(s3.getInfo());
+
+        s1.setMark(2,1);
+
+        System.out.println(s1.getInfo());
+        System.out.println(s2.getInfo());
+        System.out.println(s3.getInfo());
+    }
+}
+
+
+
+import java.util.Arrays;
+
+public class Student {
+    private String name;
+    private int [] marks;
+
+    public Student (String name,int... marks)
+    {
+        this.name = name;
+        this.marks=marks;
+    }
+
+    public Student (String name)
+    {
+        this.name = name;
+    }
+
+    public String getInfo()
+    {
+        String str=name+" Оценки:";
+
+        for (int m:marks)
+            str+=m+" ";
+
+        return str;
+    }
+
+    public void setMark(int mark,int index)
+    {
+        this.marks[index]=mark;
+    }
+
+    public void copyMarks(Student one)
+    {
+        this.marks =one.marks;
+    }
+
+    public void trueCopyMarks(Student one)
+    {
+        this.marks = Arrays.copyOf(one.marks,one.marks.length);
+    }
+}
