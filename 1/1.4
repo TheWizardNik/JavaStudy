@@ -1,0 +1,72 @@
+public class Main { 
+
+public static void main(String[] args) { 
+Human v1 = new Human.Builder("Павел") 
+.fatherName("Фёдорович") 
+.thurName("Спирин") 
+.build(); 
+Human v2 = new Human.Builder("Никита") 
+.thurName("Кожин") 
+.build(); 
+Human v3 = new Human.Builder("Александр") 
+.fatherName("Иванович") 
+.build(); 
+
+System.out.println(v1.getFIO()); 
+System.out.println(v2.getFIO()); 
+System.out.println(v3.getFIO()); 
+
+// your code goes here 
+} 
+}
+
+
+
+public class Human 
+{ 
+private String name; 
+private String fatherName; 
+private String thurName; 
+
+public static class Builder 
+{ 
+private String name; //Обязательный 
+
+private String fatherName=""; 
+private String thurName=""; 
+
+public Builder (String name) 
+{ 
+this.name = name; 
+} 
+
+public Builder thurName (String thurName) 
+{ 
+this.thurName=thurName; 
+return this; 
+} 
+
+public Builder fatherName (String fatherName) 
+{ 
+this.fatherName=fatherName; 
+return this; 
+} 
+
+public Human build () 
+{ 
+return new Human (this); 
+} 
+} 
+
+private Human(Builder builder) 
+{ 
+name = builder.name; 
+thurName = builder.thurName; 
+fatherName = builder.fatherName; 
+} 
+
+public String getFIO() { 
+return thurName+" "+name+" "+fatherName; 
+} 
+
+}
