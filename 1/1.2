@@ -1,0 +1,34 @@
+class Ideone
+{
+public static void main (String[] args) throws java.lang.Exception
+{
+Comment q1 = new Comment (1,"Всё очень плохо(");
+Comment q2 = new Comment (300,"Шикарно");
+Comment q3 = new Comment (40,"Понравилось!");
+System.out.println(q1.comm());
+System.out.println(q2.comm());
+System.out.println(q3.comm());
+// your code goes here
+}
+}
+
+
+
+
+class Comment
+{
+int reit;
+String text;
+
+String comm()
+{
+String Str = "("+reit+")"+text;
+return Str;
+}
+
+Comment (int a,String b)
+{
+reit = a;
+text = b;
+}
+}
