@@ -1,0 +1,92 @@
+public class Main {
+
+    public static void main(String[] args) {
+
+            Track sostoyanie = new Track("Состояние объектов","Янг");
+            Track shosseKOOP = new Track("Шоссе к ООП");
+            Track odnorazoviy = new Track("Одноразовый программист","Бертон");
+
+            Album kuklovod = new Album("Кукловод","Металлов",odnorazoviy);
+            Album shosse = new Album("Шоссе к ООП","Асид",sostoyanie,shosseKOOP);
+
+            System.out.println(sostoyanie.getFullTrackInfo());
+
+            System.out.println(sostoyanie.getFullAlbumInfo());
+
+        }
+}
+
+
+public class Track {
+    private String name;
+    private String author;
+    private Album album;
+
+    public Track(String name,String author)
+    {
+        this.name=name;
+        this.author=author;
+    }
+
+    public Track(String name)
+    {
+        this.name = name;
+    }
+
+    public void setAlbum (Album album)
+    {
+        this.album=album;
+    }
+
+    public String getFullTrackInfo()
+    {
+        if (author!=null)
+        {
+            return name+" Авторы:"+author+","+album.getAuthor();
+        }
+        else return name+" Автор:"+album.getAuthor();
+    }
+
+    public String getFullAlbumInfo()
+    {
+        return album.getTracks()+"";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+}
+
+
+public class Album {
+    private String name;
+    private String author;
+    private Track[] tracks;
+
+    public Album (String name,String author,Track... tracks)
+    {
+        this.name=name;
+        this.author=author;
+        this.tracks=tracks;
+        for(Track t:tracks)
+            t.setAlbum(this);
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getTracks()
+    {
+        String str="Песни с альбома "+name+": ";
+        for(Track t:tracks)
+            str+="\""+t.getName()+"\" ";
+        return str;
+    }
+
+
+}
