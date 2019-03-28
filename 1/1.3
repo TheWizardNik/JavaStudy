@@ -1,0 +1,40 @@
+class Ideone
+{
+public static void main (String[] args) throws java.lang.Exception
+{
+Human q1 = new Human (120,"Вася");
+Human q2 = new Human (210,"Таня");
+Human q3 = new Human (160,"Паша");
+System.out.println(q1.predstav());
+System.out.println(q2.predstav());
+System.out.println(q3.predstav());
+// your code goes here
+}
+}
+
+
+
+
+class Human
+{
+int size;
+String name;
+
+String predstav()
+{ 
+String str;
+if (size<150)
+str = name+" маленький человек";
+else if (size>200)
+str = name+" большой человек";
+else
+str = name+" средний человек";
+return str;
+}
+
+Human (int a,String b)
+{
+size = a;
+name = b;
+}
+}
