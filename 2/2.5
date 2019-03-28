@@ -1,0 +1,73 @@
+public class Main { 
+
+public static void main(String[] args) { 
+Album kuklovod = new Album("Кукловод","Металлов"); 
+Album shosse = new Album("Шоссе к ООП","Асид"); 
+
+Track sostoyanie = new Track("Состояние объектов","Янг",shosse); 
+Track shosseKOOP = new Track("Шоссе к ООП",shosse); 
+Track odnorazoviy = new Track("Одноразовый программист","Бертон",kuklovod); 
+
+System.out.println(sostoyanie.getFullInfo()); 
+System.out.println(shosseKOOP.getFullInfo()); 
+System.out.println(odnorazoviy.getFullInfo()); 
+} 
+}
+
+
+
+public class Track { 
+private String name; 
+private String author; 
+private Album album; 
+
+public Track(String name,String author,Album album) 
+{ 
+this.name=name; 
+this.author=author; 
+this.album=album; 
+} 
+
+public Track(String name,Album album) 
+{ 
+this.name=name; 
+this.album=album; 
+} 
+
+public Track(String name,String author) 
+{ 
+this.name = name; 
+this.author = author; 
+} 
+
+public void setAlbum(Album album) { 
+this.album = album; 
+} 
+
+public String getFullInfo() 
+{ 
+if (author!=null) 
+{ 
+return name+" Авторы:"+author+","+album.getAuthor(); 
+} 
+else return name+" Автор:"+album.getAuthor(); 
+} 
+} 
+
+
+
+public class Album { 
+private String name; 
+private String author; 
+
+public Album (String name,String author) 
+{ 
+this.name=name; 
+this.author=author; 
+} 
+
+public String getAuthor() { 
+return author; 
+} 
+
+}
