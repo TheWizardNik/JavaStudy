@@ -1,0 +1,55 @@
+public class Main {
+
+    public static void main(String[] args) {
+        Human2 v1 = new Human2("Эрих Мария","Чудов");
+        Human2 v2 = new Human2("Петр","Чудов",v1);
+        Human2 v3 = new Human2("Жан Клод","Чудов",v2);
+
+        System.out.println(v1.getFIO());
+        System.out.println(v2.getFIO());
+        System.out.println(v3.getFIO());
+    }
+}
+
+
+
+
+public class Human2 {
+    private String [] name;
+    private String thurname;
+    private Human2 father;
+
+    public Human2 (String name, String thurname, Human2 father)
+    {
+        this.name=name.split(" ");
+        this.thurname = thurname;
+        this.father=father;
+    }
+
+    public Human2 (String name, String thurname)
+    {
+        this.name = name.split(" ");
+        this.thurname=thurname;
+    }
+
+    public String  getName ()
+    {
+        return name[0];
+    }
+
+    public String getFIO()
+    {
+        String str=thurname+" ";
+
+        for(String n:name)
+        {
+            str+=n+" ";
+        }
+
+        if (father!=null)
+        return str+=father.getName()+"ович";
+        else return str;
+    }
+
+
+}
