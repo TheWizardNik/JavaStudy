@@ -1,0 +1,32 @@
+public class Main { 
+
+public static void main(String[] args) { 
+House v1 = new House(1); 
+House v2 = new House(5); 
+House v3 = new House(23); 
+
+System.out.println(v1.getFloor()); 
+System.out.println(v2.getFloor()); 
+System.out.println(v3.getFloor()); 
+// your code goes here 
+} 
+}
+
+
+
+
+public class House { 
+private int floor; 
+
+public House(int floor) 
+{ 
+this.floor=floor; 
+} 
+
+public String getFloor() 
+{ 
+if (floor%10==1&&floor!=11) 
+return "Дом с "+floor+" этажом"; 
+else return "Дом с "+floor+" этажами"; 
+} 
+}
