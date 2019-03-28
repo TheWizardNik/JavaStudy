@@ -1,0 +1,33 @@
+class Ideone
+{
+public static void main (String[] args) throws java.lang.Exception
+{
+Point q1 = new Point (1,2);
+Point q2 = new Point (3,3);
+Point q3 = new Point (4,1);
+System.out.println(q1.coordinate());
+System.out.println(q2.coordinate());
+System.out.println(q3.coordinate());
+// your code goes here
+}
+}
+
+
+
+
+class Point
+{
+int x,y;
+
+String coordinate()
+{
+String Str = "{"+x+";"+y+"}";
+return Str;
+}
+
+Point (int a,int b)
+{
+x = a;
+y = b;
+}
+}
