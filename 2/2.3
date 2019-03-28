@@ -1,0 +1,69 @@
+public class Main { 
+
+public static void main(String[] args) { 
+Worker v1 = new Worker("Козлов"); 
+WorkPlace it = new WorkPlace("IT",v1); 
+v1.setWork(it); 
+Worker v2 = new Worker("Петров",it); 
+Worker v3 = new Worker("Сидоров",it); 
+
+System.out.println(v1.getWorkerInfo()); 
+System.out.println(v2.getWorkerInfo()); 
+System.out.println(v3.getWorkerInfo()); 
+} 
+}
+
+
+
+public class Worker { 
+private String name; 
+private WorkPlace work; 
+
+public Worker (String name, WorkPlace work) 
+{ 
+this.name = name; 
+this.work = work; 
+} 
+
+public Worker (String name) 
+{ 
+this.name = name; 
+} 
+
+public String getWorkerInfo() 
+{ 
+return name+" работает в отделе " + work.getName() + ", начальник которого "+ work.getBoss(); 
+} 
+
+public void setWork(WorkPlace work) { 
+this.work = work; 
+} 
+
+public String getName() 
+{ 
+return name; 
+} 
+} 
+
+
+
+public class WorkPlace { 
+private String name; 
+private Worker boss; 
+
+public WorkPlace (String name, Worker boss) 
+{ 
+this.name=name; 
+this.boss=boss; 
+} 
+
+public String getName() 
+{ 
+return name; 
+} 
+
+public String getBoss() 
+{ 
+return boss.getName(); 
+} 
+}
