@@ -1,0 +1,53 @@
+public class Main { 
+
+public static void main(String[] args) { 
+Comment q1 = new Comment(12,"Привет"); 
+Comment q2 = new Comment(0,"Пока",q1); 
+Comment q3 = new Comment(100,"Что так грубо?!",q2); 
+
+System.out.println(q3.getFullComm()); 
+
+} 
+}
+
+
+
+public class Comment 
+{ 
+static int count=1; 
+private int reit; 
+private String text; 
+private Comment answer; 
+
+public String getComm() 
+{ 
+return "("+reit+")"+text; 
+} 
+
+public Comment (int reit,String text,Comment answer) 
+{ 
+this.reit = reit; 
+this.text = text; 
+this.answer=answer; 
+} 
+
+public Comment (int reit,String text) 
+{ 
+this.reit = reit; 
+this.text = text; 
+} 
+
+public String getFullComm() 
+{ 
+String ret=""; 
+if (answer!=null) { 
+ret+=answer.getFullComm()+"\n"; 
+for(int i=0;i<count;i++) 
+ret+="--"; 
+count++; 
+} 
+ret+=this.getComm(); 
+return ret; 
+} 
+
+}
