@@ -1,0 +1,63 @@
+public class Main {
+
+    public static void main(String[] args) {
+
+            House h1 = new House(new Apartment[][]{{new Apartment(24)},
+                                                    {new Apartment(10),new Apartment(33),new Apartment(24)},
+                                                    {new Apartment(29),new Apartment(34)}});
+
+            System.out.println(h1.getHouseInfo());
+        }
+}
+
+
+public class House {
+    private Apartment [][] apartments;
+
+    public House(Apartment [][] apartments)
+    {
+        this.apartments=apartments;
+        int size=0;
+        for (int i=0;i<apartments.length;i++)
+            for (int j=0;j<apartments[i].length;j++)
+            {
+                size++;
+                apartments[i][j].setNomer(size);
+            }
+    }
+
+    public String getHouseInfo()
+    {
+        int size=0;
+        for (int i=0;i<apartments.length;i++)
+            for (int j=0;j<apartments[i].length;j++)
+            {
+                size+=apartments[i][j].getSize();
+            }
+        return "Дом с площадью: "+size;
+    }
+}
+
+
+
+public class Apartment {
+    private int nomer;
+    private int size;
+
+    Apartment (int size)
+    {
+        this.size=size;
+    }
+
+    public void setNomer(int nomer) {
+        this.nomer = nomer;
+    }
+
+    public int getNomer() {
+        return nomer;
+    }
+
+    public int getSize() {
+        return size;
+    }
+}
