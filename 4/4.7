@@ -1,0 +1,98 @@
+public class Main {
+
+    public static void main(String[] args) {
+           House house = new House(new Apartment[][]{{new Apartment(24)},
+                        {new Apartment(10),new Apartment(33),new Apartment(24)},
+                        {new Apartment(29),new Apartment(34)}});
+
+           System.out.println("Площадь второго этажа: "+house.getFloorSize(2));
+           System.out.println("Площадь квартиры номер 5: "+house.getApartmentSize(5));
+           System.out.print("Номера квартир на 3 этаже: ");
+           int[] i = house.getApartmentNumber(3);
+           for (int j:i)
+           System.out.print(j+" ");
+
+
+        }
+}
+
+
+
+
+public class House {
+    private Apartment [][] apartments;
+
+    public House(Apartment [][] apartments)
+    {
+        this.apartments=apartments;
+        int size=0;
+        for (int i=0;i<apartments.length;i++)
+            for (int j=0;j<apartments[i].length;j++)
+            {
+                size++;
+                apartments[i][j].setNomer(size);
+            }
+    }
+
+    public String getHouseInfo()
+    {
+        int size=0;
+        for (int i=0;i<apartments.length;i++)
+            for (int j=0;j<apartments[i].length;j++)
+            {
+                size+=apartments[i][j].getSize();
+            }
+        return "Дом с площадью: "+size;
+    }
+
+    public int getFloorSize(int floor)
+    {
+        int size=0;
+        for(int i=0;i<apartments[floor-1].length;i++)
+        {
+            size+=apartments[floor-1][i].getSize();
+        }
+        return size;
+    }
+
+    public int getApartmentSize(int nomer)
+    {
+        for (Apartment a[]:apartments)
+            for (Apartment p:a)
+                if (p.getNomer()==nomer)
+                    return p.getSize();
+                return 0;
+    }
+
+    public int[] getApartmentNumber(int floor)
+    {
+        int[] numbers = new int [apartments[floor-1].length];
+        for (int i=0;i<apartments[floor-1].length;i++)
+            numbers[i]=apartments[floor-1][i].getNomer();
+        return numbers;
+    }
+}
+
+
+
+public class Apartment {
+    private int nomer;
+    private int size;
+
+    Apartment (int size)
+    {
+        this.size=size;
+    }
+
+    public void setNomer(int nomer) {
+        this.nomer = nomer;
+    }
+
+    public int getNomer() {
+        return nomer;
+    }
+
+    public int getSize() {
+        return size;
+    }
+}
