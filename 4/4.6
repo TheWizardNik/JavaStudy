@@ -1,0 +1,26 @@
+public class Main {
+
+    public static void main(String[] args) {
+           Singer sam = new Singer("Сэм","Белый string, серый float. На растрескавшемся int'е");
+
+           sam.singSong();
+        }
+}
+
+
+
+public class Singer {
+    private String name;
+    private String song;
+
+    public Singer(String name,String song)
+    {
+        this.name=name;
+        this.song=song;
+    }
+
+    public void singSong()
+    {
+        System.out.println(name+": "+song);
+    }
+}
