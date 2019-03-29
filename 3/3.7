@@ -1,0 +1,101 @@
+public class Main {
+
+    public static void main(String[] args) {
+            Publication p1=new Publication("Поймал кота",
+                                            new String[]{"кот","пойман","шок"},
+                                            321);
+
+            p1.setComment(new Comment(14,"Люблю котов"));
+            p1.setCommentToComment(new Comment(-500,"А я нет"),0);
+
+
+            System.out.println(p1.getPublication());
+        }
+}
+
+
+
+public class Publication {
+    private String name;
+    private String[] tag;
+    private Comment [] comments;
+    private Comment [][] answers;
+    private int reit;
+    private int countComment;
+    private int countAnswers;
+
+    public Publication(String name,String[] tag,int reit)
+    {
+        this.name=name;
+        this.tag=tag;
+        this.reit=reit;
+    }
+
+    public void setComment(Comment comment)
+    {
+        this.comments[countComment] = new Comment(comment.getReit(),comment.getText());
+        countComment++;
+    }
+
+    public void setCommentToComment(Comment comment,int index)
+    {
+        answers[index][countAnswers] = new Comment(comment.getReit(),comment.getText(),this.comments[index]);
+        countAnswers++;
+    }
+
+    public String getPublication(){
+        String str=this.name+"\n"+this.tag.toString()+"\n("+reit+")\n";
+        str+=answers[countComment][countAnswers].getFullComm();
+        return str;
+    }
+}
+
+
+
+public class Comment
+{
+    static int count=1;
+    private int reit;
+    private String text;
+    private Comment answer;
+
+    public String getComm()
+    {
+        return "("+reit+")"+text;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public int getReit() {
+        return reit;
+    }
+
+    public Comment (int reit, String text, Comment answer)
+    {
+        this.reit = reit;
+        this.text = text;
+        this.answer=answer;
+    }
+
+    public Comment (int reit,String text)
+    {
+        this.reit = reit;
+        this.text = text;
+    }
+
+    public String getFullComm()
+    {
+        String ret="";
+        if (answer!=null) {
+            ret+=answer.getFullComm()+"\n";
+            for(int i=0;i<count;i++)
+             ret+="--";
+            count++;
+        }
+        ret+=this.getComm();
+        return ret;
+    }
+
+}
