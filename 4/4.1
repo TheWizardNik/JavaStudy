@@ -1,0 +1,28 @@
+public class Main {
+
+    public static void main(String[] args) {
+            Gun g = new Gun(3);
+            g.shoot();
+            g.shoot();
+            g.shoot();
+            g.shoot();
+            g.shoot();
+        }
+}
+
+
+public class Gun {
+    private int ammo;
+
+    public Gun(int ammo)
+    {
+        this.ammo=ammo;
+    }
+
+    public void shoot()
+    {
+        if (ammo>0) System.out.println("Бах");
+        else System.out.println("Клац");
+        ammo--;
+    }
+}
