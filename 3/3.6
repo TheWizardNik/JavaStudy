@@ -1,18 +1,65 @@
+public class Main {
+
+    public static void main(String[] args) {
+        City a = new City ("A");
+        City b = new City ("B");
+        City c = new City ("C");
+        City d = new City ("D");
+        City e = new City ("E");
+        City f = new City ("F");
+
+        a.setMap(f,1);
+        a.setMap(b,5);
+        a.setMap(d,6);
+        b.setMap(a,5);
+        c.setMap(b,3);
+        c.setMap(d,4);
+        d.setMap(c,4);
+        d.setMap(e,2);
+        d.setMap(a,6);
+        e.setMap(f,2);
+        f.setMap(b,1);
+        f.setMap(e,2);
+
+        System.out.println(a.getWays());
+        System.out.println(b.getWays());
+        System.out.println(c.getWays());
+        System.out.println(d.getWays());
+        System.out.println(e.getWays());
+        System.out.println(f.getWays());
+    }
+}
+
+
+package com.company;
+
+import java.util.HashMap;
 import java.util.Map;
 
-public class City {
+class City {
     String name;
-    Map<City,Integer> map;
-    
+    Map<City,Integer> map=new HashMap<City,Integer>();
+
     public City(String name)
     {
         this.name=name;
     }
-    
-    public void setMap(Map map)
+
+    public void setMap(City city,int cost)
     {
-        this
-                
+        this.map.put(city,cost);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getWays()
+    {
+        String str=name+"\n";
+        for (Map.Entry<City,Integer> entry : map.entrySet()) {
+            str+=  "Город: " + entry.getKey().getName() + " Стоимость: " + entry.getValue()+"\n";
+        }
+        return str;
+    }
 }
