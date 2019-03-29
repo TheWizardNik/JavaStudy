@@ -1,0 +1,80 @@
+public class Main {
+
+    public static void main(String[] args) {
+            LomLine l = new LomLine(new Point[]{new Point(1,5),
+                                                new Point(2,8),
+                                                new Point(5,3)});
+
+            System.out.println(l.getLineSize());
+
+            l.setPoints(new Point[]{new Point(5,15),
+                                    new Point(8,10)});
+
+            System.out.println(l.getLineSize());
+        }
+}
+
+
+
+public class LomLine {
+    private Point [] points;
+
+    public LomLine(Point[] points)
+    {
+        this.points=points;
+    }
+
+    public void setPoints(Point[] points) {
+        Point[] r = new Point[this.points.length+points.length];
+        System.arraycopy(this.points, 0, r, 0, this.points.length);
+        System.arraycopy(points, 0, r, this.points.length, points.length);
+        this.points = r;
+    }
+
+    public int getLineSize()
+    {
+        int size=0;
+        for (int i =0;i<points.length-1;i++)
+        {
+            size+=(int)Math.sqrt((points[i+1].getX()-points[i].getX())*(points[i+1].getX()-points[i].getX())+(points[i+1].getY()-points[i].getY())*(points[i+1].getY()-points[i].getY()));
+        }
+        return size;
+    }
+}
+
+
+
+public class Point
+{
+    private int x,y;
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    String getPoint()
+        {
+            return "{"+x+";"+y+"}";
+        }
+
+        void setX(int x)
+        {
+            this.x = x;
+        }
+
+        void setY(int y)
+        {
+        this.y = y;
+        }
+
+        public Point (int x,int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+}
+
