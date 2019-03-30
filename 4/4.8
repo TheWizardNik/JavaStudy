@@ -1,0 +1,80 @@
+public class Main {
+
+    public static void main(String[] args) {
+           Student student1 =new Student("Иван");
+           Student student2 = new Student("Борис");
+
+           student1.setMarks("Математика",3);
+           student1.setMarks("Физика",5);
+           student2.setMarks("Математика",5);
+           student2.setMarks("Информатика",5);
+           student2.setMarks("Физкультура",5);
+
+           System.out.println(student1.getInfo());
+           System.out.println(student2.getInfo());
+
+           System.out.println(student1.getName()+" Средняя оценка:"+student1.getAverageMark());
+           System.out.println(student2.getName()+" Средняя оценка:"+student2.getAverageMark());
+
+           student1.checkStudent();
+           student2.checkStudent();
+        }
+}
+
+
+
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Student {
+    private String name;
+    Map<String,Integer> marks=new HashMap<String,Integer>();
+
+    public Student (String name)
+    {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setMarks(String subject, int mark) {
+        marks.put(subject,mark);
+    }
+
+    public String getInfo()
+    {
+        String str=name+"\n";
+        for (Map.Entry<String,Integer> entry : marks.entrySet()) {
+            str+=  "Предмет: " + entry.getKey() + " Оценка: " + entry.getValue()+"\n";
+        }
+        return str;
+    }
+
+    public int getAverageMark()
+    {
+        float average=0;
+        int count=0;
+        for (Map.Entry<String,Integer> entry : marks.entrySet()) {
+            average+=entry.getValue();
+            count++;
+        }
+        average/=count;
+        return Math.round(average);
+    }
+
+    public void checkStudent()
+    {
+        int count=0;
+        for (Map.Entry<String,Integer> entry : marks.entrySet()) {
+            if(entry.getValue()!=5)
+            count++;
+        }
+        if (count==0) System.out.println(name+"- отличник");
+        else System.out.println(name+" - не отличник");
+    }
+
+}
