@@ -1,0 +1,88 @@
+public class Main {
+
+    public static void main(String[] args) {
+           Human2 full = new Human2("Петров","Петр");
+           Human2 humanName = new Human2("Игорь");
+           Human2 humanFather = new Human2(full);
+           Human2 humanWithoutThurname = new Human2("Стас Влад",full);
+           Human2 halfFull = new Human2("Иванов","",full);
+
+            System.out.println(full.getFIO());
+            System.out.println(humanName.getFIO());
+            System.out.println(humanFather.getFIO());
+            System.out.println(humanWithoutThurname.getFIO());
+            System.out.println(halfFull.getFIO());
+
+
+
+        }
+}
+
+
+
+
+public class Human2 {
+    private String [] name;
+    private String thurname;
+    private Human2 father;
+
+    public Human2(String name)
+    {
+        this.name=name.split(" ");
+        thurname="";
+        father=null;
+    }
+
+    public Human2(String name,Human2 father)
+    {
+        if (name!=""&&name!=null) this.name=name.split(" ");
+        else this.name=new String[]{"Вася"};
+
+        if (father!=null) this.thurname=father.getThurname();
+        else if (thurname==""||thurname==null) this.thurname="Васин";
+
+        this.father=father;
+    }
+
+    public Human2(Human2 father)
+    {
+        this(null,father);
+    }
+
+    public Human2 (String thurname, String name, Human2 father)
+    {
+        this(name,father);
+        if (thurname!=null||thurname!="") this.thurname=thurname;
+    }
+
+    public Human2 (String thurname, String name)
+    {
+        this.name = name.split(" ");
+        this.thurname=thurname;
+    }
+
+    public String  getName ()
+    {
+        return name[0];
+    }
+
+    public String getThurname() {
+        return thurname;
+    }
+
+    public String getFIO()
+    {
+        String str=thurname+" ";
+
+        for(String n:name)
+        {
+            str+=n+" ";
+        }
+
+        if (father!=null)
+        return str+=father.getName()+"ович";
+        else return str;
+    }
+
+
+}
