@@ -1,0 +1,76 @@
+public class Main {
+
+    public static void main(String[] args) {
+           Line l1= new Line(new Point(3,9),new Point(15,17));
+           Line l2= new Line(l1,new Point(10,5));
+
+           System.out.println(l1.getLine());
+           System.out.println(l2.getLine());
+
+           l1.setT2(1,1);
+
+            System.out.println(l1.getLine());
+            System.out.println(l2.getLine());
+        }
+}
+
+
+
+public class Line {
+    private Point t1;
+    private Point t2;
+
+    public String getLine()
+    {
+        return "Линия от "+t1.getPoint()+ " до "+t2.getPoint();
+    }
+
+    public void newT1(Point t1)
+    {
+        this.t1=t1;
+    }
+
+    public void newT2(Point t2)
+    {
+        this.t2 = t2;
+    }
+
+    public void setT1(int x, int y)
+    {
+        t1.setX(x);
+        t1.setY(y);
+    }
+
+    public void setT2(int x, int y)
+    {
+        t2.setX(x);
+        t2.setY(y);
+    }
+
+    public Point getT1()
+    {
+        return t1;
+    }
+
+    public Point getT2()
+    {
+        return t2;
+    }
+
+    public Line (Point t1,Point t2)
+    {
+        this.t1 = t1;
+        this.t2 = t2;
+    }
+
+    public Line (Line l1,Point t2)
+    {
+        this.t1=l1.getT2();
+        this.t2=t2;
+    }
+
+    public int getSize()
+    {
+        return (int)Math.sqrt((t2.getX()-t1.getX())*(t2.getX()-t1.getX())+(t2.getY()-t1.getY())*(t2.getY()-t1.getY()));
+    }
+}
