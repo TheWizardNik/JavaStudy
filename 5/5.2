@@ -1,0 +1,32 @@
+public class Cat {
+    private String name;
+
+    public Cat(String name)
+    {
+        if (name==null||name=="") this.name = "Пушок";
+        else this.name=name;
+    }
+
+    public Cat()
+    {
+        name="Пушок";
+    }
+
+    public String getName()
+    {
+        return "Кот:"+name;
+    }
+
+    public void meow()
+    {
+        System.out.println(name+": мяу!");
+    }
+
+    public void meow(int count)
+    {
+        System.out.print(name+":");
+        for(int i=0;i<count;i++)
+        System.out.print(" мяу");
+        System.out.println("!");
+    }
+}
