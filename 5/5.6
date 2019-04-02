@@ -1,0 +1,47 @@
+
+public class Publication {
+    private String name;
+    private String[] tag;
+    private Comment [] comments=new Comment[100];
+    private Comment [][] answers=new Comment[100][100];
+    private int reit;
+    private int countComment=0;
+    private int countAnswers=0;
+
+    public Publication(String name,String[] tag,int reit)
+    {
+        if (name==""||name==null) throw new NullPointerException("Не указано название публикации");
+        this.name=name;
+        this.tag=tag;
+        this.reit=reit;
+    }
+
+    public Publication(String name,String[] tag)
+    {
+        if (name==""||name==null) throw new NullPointerException("Не указано название публикации");
+        this.name=name;
+        this.tag=tag;
+    }
+
+    public void setComment(Comment comment)
+    {
+        if (comment.getText()==""||comment==null) throw new NullPointerException("Не заполнен комментарий");
+        this.comments[countComment] = comment;
+        countComment++;
+    }
+
+    public void setCommentToComment(Comment comment,int index)
+    {
+        if (comment.getText()==""||comment==null) throw new NullPointerException("Не заполнен комментарий");
+        answers[index][countAnswers] = new Comment(comment.getReit(),comment.getText(),this.comments[index]);
+        countAnswers++;
+    }
+
+    public String getPublication(){
+        String str=name+"("+reit+")\n";
+        for(String t:tag)
+            str+="#"+t+" ";
+        str+="\n"+answers[countComment-1][countAnswers-1].getFullComm();
+        return str;
+    }
+}
