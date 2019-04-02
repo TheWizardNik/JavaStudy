@@ -1,0 +1,115 @@
+public class Main {
+
+    public static void main(String[] args) {
+           Tetragon square = new Tetragon(new Point(4,4),2);
+           Tetragon rectangle = new Tetragon(new Point(4,4),2,1);
+           Tetragon parallelogram = new Tetragon(new Point(4,4),2,1,1);
+           Tetragon trapeze = new Tetragon(new Point(4,4),2,1,3,1);
+
+           System.out.println(square.whatIsIt() + square.tetragon().getLineInfo());
+           System.out.println(rectangle.whatIsIt() + rectangle.tetragon().getLineInfo());
+           System.out.println(parallelogram.whatIsIt() + parallelogram.tetragon().getLineInfo());
+           System.out.println(trapeze.whatIsIt() + trapeze.tetragon().getLineInfo());
+
+
+        }
+}
+
+
+
+public class Tetragon {
+    private Point [] point = new Point[4];
+    private int [] sideSize=new int [3];
+    private int shift;
+
+    public Tetragon(Point point, int sideSize)
+    {
+        sideSize = this.checkSize(sideSize);
+        this.sideSize[0]=sideSize;
+        this.point[0] =point;
+        this.point[1] =new Point(point.getX()+sideSize,point.getY());
+        this.point[2] =new Point(point.getX()+sideSize,point.getY()-sideSize);
+        this.point[3] =new Point(point.getX(),point.getY()-sideSize);
+    }
+
+    public Tetragon(Point point, int sideSize1,int sideSize2)
+    {
+        sideSize1 = this.checkSize(sideSize1);
+        sideSize2 = this.checkSize(sideSize2);
+        this.sideSize[0]=sideSize1;
+        this.sideSize[1]=sideSize2;
+        this.point[0] =point;
+        this.point[1] =new Point(point.getX()+sideSize1,point.getY());
+        this.point[2] =new Point(point.getX()+sideSize1,point.getY()-sideSize2);
+        this.point[3] =new Point(point.getX(),point.getY()-sideSize2);
+    }
+
+    public Tetragon(Point point, int sideSize1,int sideSize2,int shift)
+    {
+        this.shift=shift;
+        sideSize1 = this.checkSize(sideSize1);
+        sideSize2 = this.checkSize(sideSize2);
+        this.sideSize[0]=sideSize1;
+        this.sideSize[1]=sideSize2;
+        this.point[0] =point;
+        this.point[1] =new Point(point.getX()+sideSize1,point.getY());
+        this.point[2] =new Point(point.getX()+sideSize1-shift,point.getY()-sideSize2);
+        this.point[3] =new Point(point.getX()-shift,point.getY()-sideSize2);
+    }
+
+    public Tetragon(Point point, int sideSize1,int sideSize2,int sideSize3,int shift)
+    {
+        this.shift=shift;
+        sideSize1 = this.checkSize(sideSize1);
+        sideSize2 = this.checkSize(sideSize2);
+        sideSize3 = this.checkSize(sideSize3);
+        this.sideSize[0]=sideSize1;
+        this.sideSize[1]=sideSize2;
+        this.sideSize[2]=sideSize3;
+        if (sideSize1>sideSize3)
+            point = this.checkShift(shift,sideSize1,sideSize3,point);
+        else
+            point = this.checkShift(shift,sideSize3,sideSize1,point);
+        this.point[0] =point;
+        this.point[1] =new Point(point.getX()+sideSize1,point.getY());
+        this.point[2] =new Point(point.getX()+sideSize3,point.getY()-sideSize2);
+        this.point[3] =new Point(point.getX()-shift,point.getY()-sideSize2);
+    }
+
+    private Point checkShift(int shift,int sideSizeMin,int sideSizeMax,Point point)
+    {
+        if (shift+sideSizeMin>sideSizeMax)
+        {
+            int p = point.getX()-(shift + sideSizeMin - sideSizeMax) / 2;
+            point.setX(p);
+        }
+        return point;
+    }
+
+    private int checkSize(int sideSize)
+    {
+        if (sideSize<=0)
+            sideSize=1;
+        return sideSize;
+    }
+
+    public LomLine tetragon() {
+        return new LomLine(new Point[]{point[0],point[1],point[2],point[3]});
+    }
+
+    public String whatIsIt()
+    {
+        if (sideSize[2]!=0)
+        {
+            return "Трапеция";
+        }
+        else if (sideSize[1]!=0)
+            if (shift!=0)
+                return "Параллелограмм";
+            else return "Прямоугольник";
+            else return "Квадрат";
+    }
+
+
+
+}
