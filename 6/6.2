@@ -1,0 +1,29 @@
+public class Square {
+    private Point point;
+    private int lineSize;
+
+    public Square(Point point,int lineSize)
+    {
+        if (lineSize<=0) throw new IllegalArgumentException ("Длина стороны должна быть больше 0");
+        this.point=point;
+        this.lineSize=lineSize;
+    }
+
+    public int getLineSize() {
+        return lineSize;
+    }
+
+    public void setLineSize(int lineSize) {
+        if (lineSize<=0) throw new IllegalArgumentException ("Длина стороны должна быть больше 0");
+        this.lineSize = lineSize;
+    }
+
+    public LomLine getSquare()
+    {
+        return new LomLine(new Point[]{point,
+                                        new Point(point.getX()+lineSize,point.getY()),
+                                        new Point(point.getX()+lineSize,point.getY()-lineSize),
+                                        new Point(point.getX(),point.getY()-lineSize)});
+    }
+
+}
