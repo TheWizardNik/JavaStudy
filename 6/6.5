@@ -1,0 +1,60 @@
+public class CarNumber {
+    private char [] letters=new char[3];
+    final private int number;
+    final private int reg;
+
+    public CarNumber(char[] letters,int number,int reg)
+    {
+        if (letters.length<3) throw new NullPointerException("Введено недостаточное колличество букв");
+        for (int i=0;i<3;i++)
+            if (letters[i]=='А'||
+                        letters[i]== 'В'||
+                        letters[i]== 'Е'||
+                        letters[i]== 'К'||
+                        letters[i]== 'М'||
+                        letters[i]=='Н'||
+                        letters[i]== 'О'||
+                        letters[i]=='Р'||
+                        letters[i]=='С'||
+                        letters[i]=='Т'||
+                        letters[i]=='У'||
+                        letters[i]=='Х'||
+                        letters[i]=='а'||
+                        letters[i]== 'в'||
+                        letters[i]== 'е'||
+                        letters[i]== 'к'||
+                        letters[i]== 'м'||
+                        letters[i]=='н'||
+                        letters[i]== 'о'||
+                        letters[i]=='р'||
+                        letters[i]=='с'||
+                        letters[i]=='т'||
+                        letters[i]=='у'||
+                        letters[i]=='х')
+            this.letters[i]=letters[i];
+            else throw new IllegalArgumentException("Введена неверная буква");
+            if (number>=100)
+            this.number=number;
+            else throw new IllegalArgumentException("Введите трёхзначное число для номера");
+            if (reg>=10)
+            this.reg=reg;
+            else throw new IllegalArgumentException("Введите двухзначное число для номера региона");
+    }
+
+    public String getLetters() {
+        return letters.toString();
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public int getReg() {
+        return reg;
+    }
+
+    public String getCarNumber()
+    {
+        return letters[0]+""+number+""+letters[1]+letters[2]+""+reg+"";
+    }
+}
