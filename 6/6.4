@@ -1,0 +1,98 @@
+public class Main {
+
+    public static void main(String[] args) {
+          Line l1 = new Line(new Point(3,9),new Point(5,17));
+          Line l2 = new Line(l1,new Point(10,5));
+          System.out.println(l1.getLine());
+          System.out.println(l2.getLine());
+          l1.setT2(1,1);
+          System.out.println(l1.getLine());
+          System.out.println(l2.getLine());
+          Line l3 = new Line(l2.getT1(),l2.getT2());
+          System.out.println(l2.getLine());
+          System.out.println(l3.getLine());
+          l3.setT2(23,42);
+          System.out.println(l2.getLine());
+          System.out.println(l3.getLine());
+          Line l4 = new Line(l2.getT1(),l2.getT2(),false);
+          System.out.println(l3.getLine());
+          System.out.println(l4.getLine());
+          l4.setT2(5,5);
+          System.out.println(l3.getLine());
+          System.out.println(l4.getLine());
+
+    }
+}
+
+
+
+public class Line {
+    private Point t1 = new Point();
+    private Point t2 = new Point();
+
+    public String getLine()
+    {
+        return "Линия от "+t1.getPoint()+ " до "+t2.getPoint();
+    }
+
+    /*public void newT1(Point t1) { this.t1=t1; }
+
+    public void newT2(Point t2)
+    {
+        this.t2 = t2;
+    }
+
+    public void setT1(int x, int y)
+    {
+        t1.setX(x);
+        t1.setY(y);
+    }*/
+
+    public void setT2(int x, int y)
+    {
+        t2.setX(x);
+        t2.setY(y);
+    }
+
+    public Point getT1()
+    {
+        return t1;
+    }
+
+    public Point getT2() { return t2; }
+
+    public Line (Point t1,Point t2)
+    {
+            this.t1 = t1;
+            this.t2 = t2;
+    }
+
+    public Line (Point t1,Point t2,boolean sv)
+    {
+        if (sv==true)
+        {
+        this.t1 = t1;
+        this.t2 = t2;
+        }
+        else
+        {
+            this.t1.setX(t1.getX());
+            this.t1.setY(t1.getY());
+            this.t2.setX(t2.getX());
+            this.t2.setY(t2.getY());
+        }
+    }
+
+    public Line (Line l1,Point t2)
+    {
+        this.t1=l1.getT2();
+        this.t2=t2;
+    }
+
+
+
+    public int getSize()
+    {
+        return (int)Math.sqrt((t2.getX()-t1.getX())*(t2.getX()-t1.getX())+(t2.getY()-t1.getY())*(t2.getY()-t1.getY()));
+    }
+}
