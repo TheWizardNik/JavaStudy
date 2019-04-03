@@ -1,0 +1,65 @@
+public class Main {
+
+    public static void main(String[] args) {
+           Gun revolver = new Gun(7,3);
+           revolver.shoot();
+           revolver.shoot();
+           revolver.shoot();
+           revolver.shoot();
+           revolver.shoot();
+           int ammo = 8;
+           ammo = revolver.recharge(ammo);
+           revolver.shoot();
+           revolver.shoot();
+           ammo+=revolver.empty();
+           revolver.shoot();
+        }
+}
+
+
+
+public class Gun {
+    final private int  maxAmmo;
+    private int ammo;
+
+    public Gun(int maxAmmo)
+    {
+        this.maxAmmo=maxAmmo;
+    }
+
+    public Gun(int maxAmmo,int ammo)
+    {
+        this.maxAmmo=maxAmmo;
+        if (ammo>maxAmmo) this.ammo=maxAmmo;
+        else this.ammo=ammo;
+    }
+
+    public int getAmmo() {
+        return ammo;
+    }
+
+    public int getMaxAmmo() {
+        return maxAmmo;
+    }
+
+    public void shoot()
+    {
+        if (ammo>0) System.out.println("Бах");
+        else System.out.println("Клац");
+        ammo--;
+    }
+
+    public int recharge(int ammo)
+    {
+        if (ammo>maxAmmo) { this.ammo=maxAmmo;  System.out.println("Вам возвращенно "+(ammo-maxAmmo)+" патронов"); return ammo-maxAmmo;}
+        else {this.ammo=ammo; return 0;}
+    }
+
+    public int empty()
+    {
+        int n=ammo;
+        ammo=0;
+        System.out.println("Вам возвращенно "+n+" патронов");
+        return n;
+    }
+}
