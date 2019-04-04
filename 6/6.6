@@ -1,0 +1,39 @@
+public class Circle {
+    private Point center=new Point();
+    private int radius;
+
+    public Circle(Point center,int radius)
+    {
+        if (center.getX()<=0||radius<=0||center.getY()<=0)
+            throw new IllegalArgumentException("Координаты и радиус строго больше 0");
+        this.center.setX(center.getX());
+        this.center.setY(center.getY());
+        this.radius=radius;
+    }
+
+    public int getRadius() {
+        return radius;
+    }
+
+    public Point getCenter() {
+        return center;
+    }
+
+    public void setCenter(int x,int y) {
+        if (center.getX()<=0||center.getY()<=0)
+            throw new IllegalArgumentException("Координаты и радиус строго больше 0");
+        this.center.setX(x);
+        this.center.setY(y);
+    }
+
+    public void setRadius(int radius) {
+        if (radius<=0)
+            throw new IllegalArgumentException("Координаты и радиус строго больше 0");
+        this.radius = radius;
+    }
+
+    @Override
+    public String toString() {
+        return "Центр: "+center.getPoint() + " Радиус: "+radius;
+    }
+}
