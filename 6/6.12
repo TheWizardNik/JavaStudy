@@ -1,0 +1,89 @@
+public class Album {
+    private String name;
+    private String author;
+    private Track[] tracks;
+
+    public Album (String name,String author,Track[] tracks)
+    {
+        this.name=name;
+        this.author=author;
+        try {
+        for(Track t:tracks)
+        {
+
+                if (t.getAlbum() != null) throw new IllegalAccessError("Нельзя присваивать трек повторно");
+                t.setAlbum(this);
+
+        }
+        this.tracks=tracks;
+        }
+        catch (IllegalAccessError e){ System.err.println(e);this.tracks = new Track[]{new Track("Null-track")};}
+        
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getTracks()
+    {
+        String str="Песни с альбома "+name+": ";
+        for(Track t:tracks)
+            str+="\""+t.getName()+"\" ";
+        return str;
+    }
+
+
+}
+
+
+public class Track {
+    private String name;
+    private String author;
+    private Album album;
+
+    public Track(String name,String author)
+    {
+        this.name=name;
+        this.author=author;
+    }
+
+    public Track(String name)
+    {
+        this.name = name;
+    }
+
+    public void setAlbum (Album album)
+    {
+        try{
+        if (this.getAlbum() != null) throw new IllegalAccessError("Нельзя присваивать трек повторно");
+        this.album=album;}
+        catch (IllegalAccessError e){System.err.println(e);}
+    }
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public String getFullTrackInfo()
+    {
+        if (author!=null)
+        {
+            return name+" Авторы:"+author+","+album.getAuthor();
+        }
+        else return name+" Автор:"+album.getAuthor();
+    }
+
+    public String getFullAlbumInfo()
+    {
+        return album.getTracks()+"";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+}
