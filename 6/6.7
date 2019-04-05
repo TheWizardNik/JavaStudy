@@ -1,0 +1,81 @@
+import java.util.ArrayList;
+
+public class Main {
+
+    public static void main(String[] args) {
+        ArrayList<Apartment[]> apartments = new ArrayList<Apartment[]>();
+        apartments.add(new Apartment[]{new Apartment(6)});
+        apartments.add(new Apartment[]{new Apartment(2),new Apartment(2),new Apartment(2)});
+        apartments.add(new Apartment[]{new Apartment(3),new Apartment(3)});
+        House h1 = new House(apartments);
+        h1.plusFloor(new Apartment[]{new Apartment(4)});
+        System.out.println(h1.getHouseInfo());
+    }
+}
+
+
+
+import java.util.ArrayList;
+
+public class House {
+    private ArrayList<Apartment[]> apartments;
+
+    public House(ArrayList<Apartment[]> apartments)
+    {
+        this.apartments=apartments;
+        int size=0;
+        for (int i=0;i<apartments.size();i++)
+            for (int j=0;j<apartments.get(i).length;j++)
+            {
+                size++;
+                apartments.get(i)[j].setNomer(size);
+            }
+    }
+
+    public void plusFloor(Apartment[] apartments)
+    {
+        this.apartments.add(apartments);
+    }
+
+    public ArrayList<Apartment[]> getApartments() {
+        return apartments;
+    }
+
+    public String getHouseInfo()
+    {
+        int size=0;
+        for (int i=0;i<apartments.size();i++)
+            for (int j=0;j<apartments.get(i).length;j++)
+            {
+                size+=apartments.get(i)[j].getSize();
+            }
+        return "Дом с площадью: "+size;
+    }
+
+    public int getFloorSize(int floor)
+    {
+        int size=0;
+        for(int i=0;i<apartments.get(floor-1).length;i++)
+        {
+            size+=apartments.get(floor-1)[i].getSize();
+        }
+        return size;
+    }
+
+    public int getApartmentSize(int nomer)
+    {
+        for (Apartment a[]:apartments)
+            for (Apartment p:a)
+                if (p.getNomer()==nomer)
+                    return p.getSize();
+                return 0;
+    }
+
+    public int[] getApartmentNumber(int floor)
+    {
+        int[] numbers = new int [apartments.get(floor-1).length];
+        for (int i=0;i<apartments.get(floor-1).length;i++)
+            numbers[i]=apartments.get(floor-1)[i].getNomer();
+        return numbers;
+    }
+}
