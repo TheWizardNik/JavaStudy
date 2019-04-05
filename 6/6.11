@@ -1,1 +1,78 @@
 
+public class Human2 {
+    private String [] name;
+    private String thurname;
+    private Human2 father;
+
+    public Human2(String name)
+    {
+        this.name=name.split(" ");
+        thurname="";
+        father=null;
+    }
+
+    public Human2(String name,Human2 father)
+    {
+        if (name!=""&&name!=null) this.name=name.split(" ");
+        else this.name=new String[]{"Вася"};
+
+        if (father!=null) this.thurname=father.getThurname();
+        else if (thurname==""||thurname==null) this.thurname="Васин";
+
+        this.father=father;
+    }
+
+    public Human2(Human2 father)
+    {
+        this(null,father);
+    }
+
+    public Human2 (String thurname, String name, Human2 father)
+    {
+        this(name,father);
+        if (thurname!=null||thurname!="") this.thurname=thurname;
+    }
+
+    public Human2 (String thurname, String name)
+    {
+        this.name = name.split(" ");
+        this.thurname=thurname;
+    }
+
+    public String  getName ()
+    {
+        return name[0];
+    }
+    
+    public String getThurname() {
+        return thurname;
+    }
+
+    public Human2 getFather() {
+        return father;
+    }
+
+    public void setFather(Human2 father) {
+        this.father = father;
+    }
+
+    public void setThurname(String thurname) {
+        this.thurname = thurname;
+    }
+
+    public String getFIO()
+    {
+        String str=thurname+" ";
+
+        for(String n:name)
+        {
+            str+=n+" ";
+        }
+
+        if (father!=null)
+        return str+=father.getName()+"ович";
+        else return str;
+    }
+
+
+}
