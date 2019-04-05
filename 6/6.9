@@ -1,0 +1,185 @@
+import java.util.ArrayList;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Publication p1=new Publication("Поймал кота",
+                new String[]{"кот","пойман","шок"},
+                321,
+                "Однажды военного попросили снять кота с ветки и тут началось");
+
+        Comment c2 = new Comment(-600,"А я нет");
+        p1.setComment(new Comment(14,"Люблю котов"));
+        p1.setCommentToComment(c2,0);
+        System.out.println(p1.canChange());
+        p1.setReit(true);
+        p1.setText("ляляля");
+        System.out.println(p1.getPublication());
+    }
+}
+
+
+
+
+
+public class Publication {
+    private String name;
+    private String[] tag;
+    private Comment [] comments=new Comment[100];
+    private Comment [][] answers=new Comment[100][100];
+    private int reit;
+    private int countComment=0;
+    private int countAnswers=0;
+    private boolean change=false;
+    private String text;
+
+    public String getName() {
+        return name;
+    }
+
+    public String canChange()
+    {
+        if (change||comments[0]!=null) return "Нельзя";
+        else return "Можно";
+    }
+
+    public Publication(String name, String[] tag, int reit, String text)
+    {
+        try {
+            if (name == "" || name == null) throw new NullPointerException("Не указано название публикации");
+            this.name = name;
+            this.tag = tag;
+            this.reit = reit;
+            this.text = text;
+        }
+        catch (NullPointerException e){
+            System.err.println(e);
+        }
+    }
+
+    public Publication(String name,String[] tag)
+    {
+        if (name==""||name==null) throw new NullPointerException("Не указано название публикации");
+        this.name=name;
+        this.tag=tag;
+    }
+
+    public void setText(String text) {
+        try
+        {
+            if (change||comments[0]!=null)
+                throw new IllegalAccessError("Текст этого поста нельзя изменить");
+            this.text = text;
+        }
+        catch (IllegalAccessError e)
+        {
+            System.err.println(e);
+        }
+    }
+
+    public void setReit(boolean bool) {
+        if (bool) reit += 1;
+        else reit-=1;
+        change=true;
+    }
+
+    public void setComment(Comment comment)
+    {
+        if (comment.getText()==""||comment==null) throw new NullPointerException("Не заполнен комментарий");
+        this.comments[countComment] = comment;
+        countComment++;
+    }
+
+    public void setCommentToComment(Comment comment,int index)
+    {
+        if (comment.getText()==""||comment==null) throw new NullPointerException("Не заполнен комментарий");
+        answers[index][countAnswers] = new Comment(comment.getReit(),comment.getText(),this.comments[index]);
+        countAnswers++;
+    }
+
+    public String getPublication(){
+        String str=name+"("+reit+")\n";
+        for(String t:tag)
+            str+="#"+t+" ";
+        str+="\n"+text;
+        str+="\n"+answers[countComment-1][countAnswers-1].getFullComm();
+        return str;
+    }
+}
+
+
+
+public class Comment
+{
+    static int count=1;
+    private int reit;
+    private String text;
+    private Comment answer;
+    private boolean change=false;
+
+    public String canChange()
+    {
+        if (change) return "Нельзя";
+        else return "Можно";
+    }
+
+    public String getComm()
+    {
+        return "("+reit+")"+text;
+    }
+
+    public void setText(String text) {
+        try {
+        if (answer!=null||change)
+            throw new IllegalAccessError("Этот комментарий нельзя изменить");
+            this.text = text;
+        }
+        catch (IllegalAccessError e)
+        {
+         System.err.println(e);
+        }
+
+
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public int getReit() {
+        return reit;
+    }
+
+    public void setReit(boolean bool) {
+        if (bool) reit += 1;
+        else reit-=1;
+        change=true;
+    }
+
+    public Comment (int reit, String text, Comment answer)
+    {
+        this.reit = reit;
+        this.text = text;
+        this.answer=answer;
+    }
+
+    public Comment (int reit,String text)
+    {
+        this.reit = reit;
+        this.text = text;
+    }
+
+    public String getFullComm()
+    {
+        String ret="";
+        if (answer!=null) {
+            ret+=answer.getFullComm()+"\n";
+            for(int i=0;i<count;i++)
+             ret+="--";
+            count++;
+        }
+        ret+=this.getComm();
+        return ret;
+    }
+
+}
