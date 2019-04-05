@@ -1,0 +1,46 @@
+class Human
+{
+    private int size;
+    private String name;
+
+    public String predstav()
+    {
+        String str;
+        if (size<150)
+            str = name+" маленький человек";
+        else if (size>200)
+            str = name+" большой человек";
+        else
+            str = name+" средний человек";
+        return str;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Human (int size, String name)
+    {
+        try {
+            if (name != null && name != "") {
+                char[] check = name.toCharArray();
+                for (int i : check)
+                    if ((i < 1040 || i > 1103)&&(i!=1025||i!=1105))
+                        throw new IllegalArgumentException("Имя может состоять только из букв русского алфавита");
+            } else throw new IllegalArgumentException("Имя должно быть непустым");
+
+            if (size > 300 || size < 10)
+                throw new IllegalArgumentException("Рост должен находиться в диапозоне от 10 до 300");
+            this.size = size;
+            this.name = name;
+        }
+        catch (IllegalArgumentException e)
+        {
+            System.err.println(e);
+        }
+    }
+}
